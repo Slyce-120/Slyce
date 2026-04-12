@@ -197,6 +197,7 @@ handler.help = [
 handler.tags = ['group'];
 handler.command = /^(inattivi|inactive|inactivos|inactivo|inativos|inativo|inaktiv|inaktive|不活跃|非活跃|неактивные|неактивный|غيرنشط|غيرفعال|निष्क्रिय|निष्क्रियउपयोगकर्ता|inactif|inactifs|tidakaktif|pengguna_tidakaktif|aktifdeğil|pasif)$/i;
 handler.group = true;
+handler.moderator = true;
 handler.owner = false;
 handler.botAdmin = true;
 

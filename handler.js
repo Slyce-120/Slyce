@@ -320,11 +320,13 @@ async function processMessage(m, chatUpdate, stats, activePlugins) {
         if (!('antispamcomandi' in chat)) chat.antispamcomandi = true
         if (!('welcome' in chat)) chat.welcome = true
         if (!('bye' in chat)) chat.bye = 'welcome' in chat ? !!chat.welcome : true
+        if (!Array.isArray(chat.moderators)) chat.moderators = []
       } else {
         global.db.data.chats[m.chat] = {
           name: this.getName(m.chat), isBanned: false, detect: true,
           delete: false, antiLink: true, antiTraba: true, expired: 0,
-          messaggi: 0, antispamcomandi: true, welcome: true, bye: true
+          messaggi: 0, antispamcomandi: true, welcome: true, bye: true,
+          moderators: []
         }
       }
 
@@ -384,6 +386,7 @@ async function processMessage(m, chatUpdate, stats, activePlugins) {
     let isRAdmin = user?.admin == 'superadmin' || false
     let isAdmin = m.isGroup ? hasAdminRole(user) : false
     let isBotAdmin = m.isGroup ? hasAdminRole(bot) : false
+    let isModerator = m.isGroup ? (isAdmin || isOwner2 || (global.db.data.chats[m.chat]?.moderators || []).includes(m.sender)) : false
 
     if (m.isGroup && (!user || !bot)) {
       const freshMetadata = await getGroupMetadataCached(this, m.chat, { force: true })
@@ -400,6 +403,7 @@ async function processMessage(m, chatUpdate, stats, activePlugins) {
         isRAdmin = user?.admin == 'superadmin' || false
         isAdmin = hasAdminRole(user)
         isBotAdmin = hasAdminRole(bot)
+        isModerator = isAdmin || isOwner2 || (global.db.data.chats[m.chat]?.moderators || []).includes(m.sender)
       }
     }
 
@@ -413,7 +417,7 @@ async function processMessage(m, chatUpdate, stats, activePlugins) {
           const shouldContinue = await plugin.before.call(this, m, {
             conn: this, participants: normalizedParticipants, groupMetadata,
             user, bot, isROwner, isOwner: isOwner2, isRAdmin, isAdmin,
-            isBotAdmin, isPrems, chatUpdate, __dirname: ___dirname, __filename
+            isBotAdmin, isModerator, isPrems, chatUpdate, __dirname: ___dirname, __filename
           })
           if (shouldContinue) continue
         } catch (e) { console.error(`Errore in plugin.before (${name}):`, e) }
@@ -465,16 +469,17 @@ async function processMessage(m, chatUpdate, stats, activePlugins) {
         let chatDb = global.db.data.chats[m.chat]
         let adminMode = chatDb?.soloadmin
         let mystica = `${plugin.botAdmin || plugin.admin || plugin.group || plugin || noPrefix || _prefix || m.text.slice(0, 1) == _prefix || plugin.command}`
-        if (adminMode && !isOwner2 && !isROwner && m.isGroup && !isAdmin && mystica) return
+        if (adminMode && !isOwner2 && !isROwner && m.isGroup && !isAdmin && !isModerator && mystica) return
 
         if (plugin.rowner && plugin.owner && !(isROwner || isOwner2)) { fail('owner', m, this); continue }
         if (plugin.rowner && !isROwner) { fail('rowner', m, this); continue }
         if (plugin.owner && !isOwner2) { fail('owner', m, this); continue }
         if (plugin.mods && !isMods) { fail('mods', m, this); continue }
         if (plugin.premium && !isPrems) { fail('premium', m, this); continue }
+        if (plugin.moderator && !isModerator) { fail('moderator', m, this); continue }
         if (plugin.group && !m.isGroup) { fail('group', m, this); continue }
         else if (plugin.botAdmin && !isBotAdmin) { fail('botAdmin', m, this); continue }
-        else if (plugin.admin && !isAdmin) { fail('admin', m, this); continue }
+        else if (plugin.admin && !isAdmin && !(plugin.moderator && isModerator)) { fail('admin', m, this); continue }
         if (plugin.private && m.isGroup) { fail('private', m, this); continue }
         if (plugin.register == true && _user?.registered == false) { fail('unreg', m, this); continue }
 
@@ -491,7 +496,7 @@ async function processMessage(m, chatUpdate, stats, activePlugins) {
           match, usedPrefix, noPrefix, _args, args, command, text,
           conn: this, normalizedParticipants, participants, groupMetadata,
           user, bot, isROwner, isOwner: isOwner2, isRAdmin, isAdmin,
-          isBotAdmin, isPrems, chatUpdate, __dirname: ___dirname, __filename,
+          isBotAdmin, isModerator, isPrems, chatUpdate, __dirname: ___dirname, __filename,
           mentionedJid: m.mentionedJid || []
         }
 
@@ -530,7 +535,8 @@ async function processMessage(m, chatUpdate, stats, activePlugins) {
     if (m?.sender) {
       let user = global.db.data.users[m.sender]
       let chat = global.db.data.chats[m.chat]
-      if (user?.muto) {
+      const isMutedHere = user && (user.muto === true || (typeof user.muto === 'object' && user.muto?.[m.chat]))
+      if (isMutedHere) {
         await this.sendMessage(m.chat, {
           delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }
         }).catch(console.error)
@@ -660,6 +666,7 @@ global.dfail = (type, m, conn) => {
     group: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐩𝐮𝐨𝐢 𝐮𝐭𝐢𝐥𝐢𝐳𝐳𝐚𝐫𝐥𝐨 𝐢𝐧 𝐮𝐧 𝐠𝐫𝐮𝐩𝐩𝐨 👥',
     private: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐩𝐮𝐨𝐢 𝐮𝐭𝐢𝐥𝐢𝐧𝐢𝐭𝐚𝐫𝐥𝐨 𝐢𝐧 𝐜𝐡𝐚𝐭 𝐩𝐫𝐢𝐯𝐚𝐭𝐚 👤',
     admin: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐩𝐞𝐫 𝐬𝐨𝐥𝐢 𝐚𝐝𝐦𝐢𝐧 👑',
+    moderator: '𝐐𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐞̀ 𝐩𝐞𝐫 𝐦𝐨𝐝𝐞𝐫𝐚𝐭𝐨𝐫𝐢 🛡️',
     botAdmin: '𝐃𝐞𝐯𝐢 𝐝𝐚𝐫𝐞 𝐚𝐝𝐦𝐢𝐧 𝐚𝐥 𝐛𝐨𝐭 👑',
     restrict: '🔐 𝐑𝐞𝐬𝐭𝐫𝐢𝐜𝐭 𝐞 𝐝𝐢𝐬𝐚𝐭𝐭𝐢𝐯𝐚𝐭𝐨 🔐'
   }[type]

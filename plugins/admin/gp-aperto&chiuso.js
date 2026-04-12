@@ -39,6 +39,7 @@ handler.help = [
 handler.tags = ['group'];
 handler.command = /^(aperto|chiuso|open|close|abrir|cerrar|aberto|fechado|öffnen|schließen|开放|关闭|открыть|закрыть|فتح|إغلاق|खोलना|बंद|ouvrir|fermer|buka|tutup|aç|kapat)$/i;
 handler.admin = true;
+handler.moderator = true;
 handler.botAdmin = true;
 handler.group = true;
 

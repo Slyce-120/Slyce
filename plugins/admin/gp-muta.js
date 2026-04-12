@@ -41,6 +41,11 @@ let handler = async (m, { conn, command, text, isAdmin }) => {
     if (!global.db.data.users[targetJid]) global.db.data.users[targetJid] = {}
     const user = global.db.data.users[targetJid]
 
+    // Migrazione: se muto è booleano, converti in oggetto per-gruppo
+    if (typeof user.muto !== 'object' || user.muto === null) {
+        user.muto = {}
+    }
+
     if (targetJid === botJid) throw global.t('muteBotImmune', m.sender, m.chat)
     if (targetJid === ownerJid) throw global.t('muteGroupOwnerImmune', m.sender, m.chat)
     if (targetJid === senderJid) {
@@ -50,8 +55,8 @@ let handler = async (m, { conn, command, text, isAdmin }) => {
     }
 
     if (isMute) {
-        if (user.muto) throw global.t('muteAlreadyMuted', m.sender, m.chat)
-        user.muto = true
+        if (user.muto[m.chat]) throw global.t('muteAlreadyMuted', m.sender, m.chat)
+        user.muto[m.chat] = true
         await conn.sendMessage(m.chat, {
             text: global.t('muteSuccess', m.sender, m.chat, { target: getJidUser(targetJid) }),
             mentions: [targetJid]
@@ -59,8 +64,8 @@ let handler = async (m, { conn, command, text, isAdmin }) => {
         return
     }
 
-    if (!user.muto) throw global.t('unmuteNotMuted', m.sender, m.chat)
-    user.muto = false
+    if (!user.muto[m.chat]) throw global.t('unmuteNotMuted', m.sender, m.chat)
+    delete user.muto[m.chat]
     await conn.sendMessage(m.chat, {
         text: global.t('unmuteSuccess', m.sender, m.chat, { target: getJidUser(targetJid) }),
         mentions: [targetJid]
@@ -72,6 +77,7 @@ handler.tags = ['group']
 handler.command = /^(muta|smuta|mute|unmute|silenciar|dessilenciar|silencia|dessilencia|silenciar_pt|dessilenciar_pt|silenciar_es|dessilenciar_es|muter|démuter|stummschalten|entstummschalten|禁言|解禁|заглушить|разглушить|كتم|رفع_الكتم|म्यूट|अनम्यूट|bungkam|buka_bungkam|sustur|susturmayı_kaldır)$/i
 handler.group = true
 handler.admin = true
+handler.moderator = true
 handler.botAdmin = true
 
 export default handler

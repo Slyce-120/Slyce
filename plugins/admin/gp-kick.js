@@ -97,5 +97,6 @@ async function handler(m, { isBotAdmin, isOwner, text, command, conn }) {
 handler.customPrefix = /^(\.?kick|\.?simkick|rimuovi|sparisci|expulsar|expulsión|expulsar_pt|expulsão|expulser|expulsion|rauswerfen|ausschließen|выгнать|удалить|طرد|إخراج|निकालना|बाहरकाढना|踢出|移除|tendang|keluar|atmak|kovmak)(?=\s|$)/i
 handler.command = new RegExp
 handler.admin = true
+handler.moderator = true
 
 export default handler

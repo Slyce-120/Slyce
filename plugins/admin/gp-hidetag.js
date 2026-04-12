@@ -85,6 +85,7 @@ handler.help = [
 handler.tags = ['gruppo'];
 handler.command = /^(\.?hidetag|totag|tag|menzione|menziona|mention|mencionar|etiquetar|etiqueta|marcar|marcação|markieren|erwähnen|提及|标签|упомянуть|тег|إشارة|تاغ|उल्लेख|टैग|mentionner|étiqueter|sebut|tag_id|etiket|bahset)$/i;
 handler.admin = true;
+handler.moderator = true;
 handler.group = true;
 
 

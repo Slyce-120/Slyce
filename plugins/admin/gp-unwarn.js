@@ -70,6 +70,7 @@ handler.command = /^(delwarn|unwarn|rimuoviavvertimento|quitaraviso|removeraviso
 
 handler.group = true;
 handler.admin = true;
+handler.moderator = true;
 handler.botAdmin = true;
 
 export default handler;
