@@ -7,7 +7,7 @@ import fs from 'fs'
 import chalk from 'chalk'
 import { messageQueue, commandQueue, mediaQueue } from './lib/queue.js'
 
-const { proto } = await import('@whiskeysocket/baileys')
+const { proto } = await import('@chatunity/baileys')
 
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(function () {

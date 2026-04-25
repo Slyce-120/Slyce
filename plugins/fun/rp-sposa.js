@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { generateWAMessageFromContent } from '@whiskeysocket/baileys'
+import { generateWAMessageFromContent } from '@chatunity/baileys'
 
 const proposals = {}
 

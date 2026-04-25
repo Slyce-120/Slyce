@@ -34,7 +34,7 @@
     "@bochilteam/scraper": "^5.0.1",
     "@distube/ytdl-core": "4.16.12",
     "@googleapis/youtube": "31.0.0",
-    "@whiskeysocket/baileys": "npm:@realvare/baileys",
+    "@chatunity/baileys": "latest",
     "@green-code/music-track-data": "latest",
     "@vitalets/google-translate-api": "^8.0.0",
     "@xenova/transformers": "^2.17.2",
