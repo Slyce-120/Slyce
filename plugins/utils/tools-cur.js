@@ -139,7 +139,7 @@ const handler = async (m, { conn, args, usedPrefix, text, command }) => {
         { buttonId: `.playvideo ${artist} - ${title}`, buttonText: { displayText: '🎥 Scarica video' }, type: 1 },
       ],
       headerType: 4,
-      footer: `𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲-𝐁𝐨𝐭`
+      footer: `ꪶ𖣘ꫂ𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻ꪶ𖣘ꫂ`
     }
 
     await conn.sendMessage(m.chat, msg, { quoted: m })
