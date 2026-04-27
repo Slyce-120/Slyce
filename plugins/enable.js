@@ -31,6 +31,7 @@ const features = [
   { key: 'antisondaggi',    label: 'Antisondaggi' },
   { key: 'antitiktok',      label: 'AntiTikTok' },
   { key: 'chatbotPrivato',  label: 'ChatbotPrivato', ownerOnly: true },
+  { key: 'bestemmiometro',      label: 'Bestemmiometro' },
 ]
 
 let handler = async (m, { conn, command, args, isOwner, isROwner }) => {
