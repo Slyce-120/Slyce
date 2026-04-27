@@ -9,18 +9,18 @@ import moment from 'moment-timezone';
 
 global.botnumber = '';
 global.confirmCode = '';
-global.nomebot = '𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲-𝐁𝐨𝐭';
-global.packname = '𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲-𝐁𝐨𝐭';
+global.nomebot = 'ꪶ𖣘ꫂ𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻ꪶ𖣘ꫂ';
+global.packname = 'ꪶ𖣘ꫂ𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻ꪶ𖣘ꫂ';
 global.author = '𝐌𝐝';
-global.vs = '11';
-global.collab = 'Demo';
-global.wm = global.nomebot;
+global.vs = '1.0';
+global.collab = '𝐒𝐛𝐨𝐫𝐫𝐚 𝐁𝐨𝐭-𝐌𝐃';
+global.wm = 'ꪶ𖣘ꫂ𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻ꪶ𖣘ꫂ;'
 global.wait = 'ⓘ 𝐂𝐚𝐫𝐢𝐜𝐚𝐦𝐞𝐧𝐭𝐨 ...';
 
 
 global.owner = [
-  ['393773842461', '𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲', true],
-  ['xxxxxxxxxx'], // Numero, Nome, True (attenzione alla sintassi deve essere identico a sopra!)
+  ['12368910153', '𝑺𝑳𝒀𝑪𝑬', true],
+  ['xxxxxxxxxx'],
   ['xxxxxxxxxx'],
   ['xxxxxxxxxx'],
   ['xxxxxxxxxx'],
