@@ -2,7 +2,7 @@
 let handler = async (m, { conn, text, usedPrefix, command }) => {
     const userId = m.sender;
     const groupId = m.isGroup ? m.chat : null;
-    const nomeDelBot = global.db.data.nomedelbot || 'ChatUnity';
+    const nomeDelBot = global.db.data.nomedelbot || '𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻';
 
     const newsletterJid = global.channelid || global.IdCanale?.[0] || '120363259442839354@newsletter';
     const thumbnailUrl = 'https://i.ibb.co/rG9XPFmJ/iconica-di-whatsapp-3d-113255-84795.jpg';
