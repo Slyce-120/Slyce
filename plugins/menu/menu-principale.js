@@ -12,11 +12,11 @@ const handler = async (message, { conn, usedPrefix, command }) => {
     const groupId = message.isGroup ? message.chat : null;
     
     const userCount = Object.keys(global.db.data.users).length;
-    const botName = global.db.data.nomedelbot || 'ChatUnity';
+    const botName = global.db.data.nomedelbot || '𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻';
 
     const menuText = generateMenuText(usedPrefix, botName, userCount, userId, groupId);
 
-    const photopath = path.join(__dirname, '../../media/principale.jpeg'); 
+    const photopath = path.join(__dirname, '../../media/menu.jpeg'); 
     
     const footerText = global.t('menuFooter', userId, groupId);
     const adminMenuText = global.t('menuAdmin', userId, groupId);
@@ -88,14 +88,11 @@ function generateMenuText(prefix, botName, userCount, userId, groupId) {
     
     return `
 ⋆ ︵★ ${menuTitle} ★︵ ⋆
-୧ 📥 ୭ *${prefix}${installText}*
 ୧ ⚙️ ୭ *${prefix}${systemText}*
 ୧ 🚀 ୭ *${prefix}${pingText}*
 ୧ 📝 ୭ *${prefix}${reportText}* 
 ୧ 💡 ୭ *${prefix}${suggestText}*
-୧ 🤖 ୭ *${prefix}chatunity*
-୧ 🤖 ୭ *${prefix}lingua*
-
+୧ 🕸️ ୭ *${prefix}staff
 ୧・*${versionText}:* ${vs}
   ୧・${usersText}: ${userCount}
 ╰♡꒷ ๑ ⋆˚₊⋆──ʚ˚ɞ──⋆˚₊⋆ ๑ ⪩
