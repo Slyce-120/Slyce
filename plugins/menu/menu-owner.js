@@ -7,7 +7,7 @@ const handler = async (message, { conn, usedPrefix, command }) => {
     const userId = message.sender;
     const groupId = message.isGroup ? message.chat : null;
     const menuText = generateMenuText(usedPrefix, userId, groupId);
-    const imagePath = path.join(__dirname, '../../media/owner.jpeg');
+    const imagePath = path.join(__dirname, '../../media/menu.jpeg');
     const footerText = global.t('chooseMenu', userId, groupId) || 'Scegli un menu:';
     const mainMenuText = global.t('mainMenuButton', userId, groupId) || '🏠 Menu Principale';
     const adminMenuText = global.t('menuAdmin', userId, groupId) || '🛡️ Menu Admin';
@@ -55,8 +55,8 @@ handler.command = /^(menuowner|menupadrone|menúpropietario|menupropietario|menu
 
 export default handler;
 function generateMenuText(prefix, userId, groupId) {
-    const vs = global.vs || '8.0';
-    const collab = global.collab || 'ONE PIECE';
+    const vs = global.vs || '1.0';
+    const collab = global.collab || '𝐒𝐛𝐨𝐫𝐫𝐚 𝐁𝐨𝐭-𝐌𝐃';
     const menuTitle = global.t('menuownerTitle', userId, groupId);
     const versionText = global.t('menuownerVersionLabel', userId, groupId);
     const supportText = global.t('menuownerSupportLabel', userId, groupId);
