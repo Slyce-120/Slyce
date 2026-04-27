@@ -8,7 +8,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     const userId = m.sender;
     const groupId = m.isGroup ? m.chat : null;
     const chat = global.db.data.chats[m.chat] || {};
-    const imagePath = path.join(__dirname, '../../media/sicurezza.jpeg');
+    const imagePath = path.join(__dirname, '../../media/menu.jpeg');
 
     const menuText = generateMenuText(chat, userId, groupId);
     const footerText = global.t('chooseMenu', userId, groupId) || 'Scegli un menu:';
@@ -88,7 +88,8 @@ function generateMenuText(chat, userId, groupId) {
         Antivoip: !!chat?.antivoip,
         Antimedia: !!chat?.antimedia,
         Antisondaggi: !!chat?.antisondaggi,
-        AntiTikTok: !!chat?.antitiktok
+        AntiTikTok: !!chat?.antitiktok,
+        Bestemmiometro: !!chat?.bestemmiometro
     };
 
     const howToUse = `
