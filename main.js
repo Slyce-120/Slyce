@@ -22,7 +22,7 @@ import './lib/language.js';
 
 const authFolder = global.authFile || 'sessioni';
 global.authFile = authFolder;
-global.authFileJB = global.authFileJB || 'chatunity-sub';
+global.authFileJB = global.authFileJB || '𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻y-sub';
 const sessionFolder = path.join(process.cwd(), authFolder);
 const tempDir = join(process.cwd(), 'temp');
 const tmpDir = join(process.cwd(), 'tmp');
@@ -179,7 +179,7 @@ let successfulConnectionLogged = false;
 
 function logSystem(message, color = 'cyanBright') {
   const printer = chalk[color] || chalk.cyanBright;
-  console.log(printer(`〔 ChatUnity 〕 ${message}`));
+  console.log(printer(`〔 𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻 〕 ${message}`));
 }
 
 function normalizePhoneNumberInput(value = '') {
@@ -527,6 +527,7 @@ async function connectionUpdate(update) {
 ┊ ┊ ┊ ┊‿ ˚➶ ｡˚   SCANSIONA IL CODICE QR
 ┊ ┊ ┊ ˚✧ Scade tra 45 secondi
 ┊ ˚➶ ｡˚ ☁︎ 
+𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻
 `));
     logSystem('Apri WhatsApp > Dispositivi collegati > Collega un dispositivo e scansiona il QR.', 'yellowBright');
     global.qrGenerated = true;
@@ -565,7 +566,7 @@ async function connectionUpdate(update) {
       global.connectionMessagesPrinted.loggedOut = true;
       process.exit(1);
     } else if (reason === DisconnectReason.connectionReplaced && !global.connectionMessagesPrinted.connectionReplaced) {
-      console.log(chalk.bold.yellowBright(`╭⭑⭒━━━✦ ⚠️ CONNESSIONE SOSTITUITA ✦━━━⭒⭑\n┃ Chiudi le altre sessioni attive.\n╰⭑⭒━━━✦ chatunity-bot ✦━━━⭒⭑`));
+      console.log(chalk.bold.yellowBright(`╭⭑⭒━━━✦ ⚠️ CONNESSIONE SOSTITUITA ✦━━━⭒⭑\n┃ Chiudi le altre sessioni attive.\n╰⭑⭒━━━✦ 𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻 ✦━━━⭒⭑`));
       global.connectionMessagesPrinted.connectionReplaced = true;
       process.exit(1);
     } else if (reason === DisconnectReason.connectionLost && !global.connectionMessagesPrinted.connectionLost) {
