@@ -2,7 +2,7 @@
 let handler = async (m, { conn, command }) => {
     const userId = m.sender;
     const groupId = m.isGroup ? m.chat : null;
-    const nomeDelBot = global.db.data.nomedelbot || 'ChatUnity';
+    const nomeDelBot = global.db.data.nomedelbot || '𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻';
     
     let isOpen = /^(aperto|open|abrir|aberto|öffnen|开放|открыть|فتح|खोलना|ouvrir|buka|aç)$/i.test(command);
     
