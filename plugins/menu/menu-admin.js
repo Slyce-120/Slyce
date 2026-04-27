@@ -92,6 +92,6 @@ function generateMenuText(prefix, userId, groupId) {
 
 ${commandList.split('\n').map(line => `୧ ${line.trim()}`).join('\n')}
 ꒷꒦ ✦ ୧・︶ : ︶ ꒷꒦ ‧₊ ୧
-> © ${global.t('poweredBy', userId, groupId)} 𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲
+> © ${global.t('poweredBy', userId, groupId)} 𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻
 `.trim();
 }
