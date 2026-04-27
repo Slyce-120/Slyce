@@ -28,7 +28,7 @@ let handler = async (m, { conn, text, args, groupMetadata, isAdmin, isOwner }) =
         }
     }
 
-    const nomeDelBot = global.db.data.nomedelbot || 'ChatUnity';
+    const nomeDelBot = global.db.data.nomedelbot || '𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻';
 
     if (!args[0]) {
         const buttons = [
