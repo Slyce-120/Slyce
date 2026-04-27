@@ -8,36 +8,33 @@ let handler = async (m, { conn }) => {
         forwardedNewsletterMessageInfo: {
             newsletterJid: '120363259442839354@newsletter',
             serverMessageId: 100,
-            newsletterName: `𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲-𝐁𝐨𝐭 ✦ Staff Ufficiale`
+            newsletterName: `𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻 ✦ Staff Ufficiale`
         }
     };
 
     // Schede di contatto (vCard)
     const vcards = [
-        { vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;Vale | CEO;;;\nFN:Vale | CEO\nORG:𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲\nTITLE:CEO\nitem1.TEL;waid=393773842461:+39 377 384 2461\nitem1.X-ABLabel:Cellulare\nEND:VCARD` },
-        { vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;Diego;;;\nFN:Diego\nORG:𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲\nTITLE:Staff\nitem1.TEL;waid=393520583119:+39 352 058 3119\nitem1.X-ABLabel:Cellulare\nEND:VCARD` },
-        { vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;Matte;;;\nFN:Matte\nORG:𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲\nTITLE:Staff\nitem1.TEL;waid=66621409462:+66 62 140 9462\nitem1.X-ABLabel:Cellulare\nEND:VCARD` },
-        { vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;Giuse;;;\nFN:Giuse\nORG:𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲\nTITLE:Staff\nitem1.TEL;waid=393291944932:+39 329 194 4932\nitem1.X-ABLabel:Cellulare\nEND:VCARD` }
+        { vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;𝑺𝑳𝒀𝑪𝑬 | CEO;;;\nFN: | CEO\nORG:𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻\nTITLE:CEO\nitem1.TEL;waid=12368910153:+1 236 891 0153\nitem1.X-ABLabel:Cellulare\nEND:VCARD` },
+        { vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;Dieh;;;\nFN:Dieh\nORG:𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻\nTITLE:Staff\nitem1.TEL;waid=393892016995:+39 389 201 6995\nitem1.X-ABLabel:Cellulare\nEND:VCARD` },
     ];
 
     // Testo elegante con i numeri in chiaro
     let testo = `
-୧・︶ ✦ 𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲-𝐁𝐨𝐭 ✦ ︶・୨
+୧・︶ ✦ ꪶ𖣘ꫂ𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻ꪶ𖣘ꫂ ✦ ︶・୨
 ꒷꒦ ‧₊ 🛡️ 𝐒 𝐓 𝐀 𝐅 𝐅 🛡️ ₊‧ ꒷꒦
 ୧・︶ : ︶ : ︶ : ︶ : ︶ : ︶・୨
 
-✦ 👑 +39 377 384 2461 ~ Vale |CEO|
-✦ 👨‍💻 +39 352 058 3119 ~ Diego
-✦ 👨‍💻 +66 62 140 9462 ~ Matte
-✦ 👨‍💻 +39 329 194 4932 ~ Giuse
+✦ 👑 +1 (236) 891 0153 ~ 𝑺𝑳𝒀𝑪𝑬 |CEO|
+✦ 👨‍💻 +39 389 201 6995 ~ dieh
 
-👑 _Il team dietro 𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲._
+
+👑 _Il team dietro 𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻._
 ୧・︶ : ︶ ꒷꒦ ‧₊ ୧`.trim();
 
     // 1. Invia le schede contatto (rubrica)
     await conn.sendMessage(m.chat, {
         contacts: {
-            displayName: 'Staff 𝐂𝐡𝐚𝐭𝐔𝐧𝐢𝐭𝐲',
+            displayName: 'Staff 𝑺𝑳𝒀𝑪𝑬 𝑩𝑶𝑻',
             contacts: vcards
         },
         contextInfo: cuContext
