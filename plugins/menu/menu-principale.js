@@ -89,12 +89,11 @@ function generateMenuText(prefix, botName, userCount, userId, groupId) {
     return `
 ⋆ ︵★ ${menuTitle} ★︵ ⋆
 ୧ ⚙️ ୭ *${prefix}${systemText}*
-୧ 🚀 ୭ *${prefix}${pingText}*
 ୧ 📝 ୭ *${prefix}${reportText}* 
 ୧ 💡 ୭ *${prefix}${suggestText}*
-୧ 🕸️ ୭ *${prefix}staff
+୧ 🕸️ ୭ *${prefix}staff*
 ୧・*${versionText}:* ${vs}
-  ୧・${usersText}: ${userCount}
+  ୧・*𝐂𝐎𝐋𝐋𝐀𝐁:* ${collab}
 ╰♡꒷ ๑ ⋆˚₊⋆──ʚ˚ɞ──⋆˚₊⋆ ๑ ⪩
 `.trim();
 }
