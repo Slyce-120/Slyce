@@ -1,0 +1,1 @@
+const photopath = path.join(__dirname, '../../media/image-1.jpg');
