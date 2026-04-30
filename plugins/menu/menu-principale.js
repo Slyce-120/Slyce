@@ -92,8 +92,8 @@ function generateMenuText(prefix, botName, userCount, userId, groupId) {
 ୧ 📝 ୭ *${prefix}${reportText}* 
 ୧ 💡 ୭ *${prefix}${suggestText}*
 ୧ 🕸️ ୭ *${prefix}staff*
-୧・*${versionText}:* ${vs}
-  ୧・*𝐂𝐎𝐋𝐋𝐀𝐁:* ${collab}
+୧・*${0.8}:* ${vs}
+  ୧・*𝐂𝐎𝐋𝐋𝐀𝐁:* ${ChatUnity}
 ╰♡꒷ ๑ ⋆˚₊⋆──ʚ˚ɞ──⋆˚₊⋆ ๑ ⪩
 `.trim();
 }
