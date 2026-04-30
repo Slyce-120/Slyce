@@ -1,56 +1,55 @@
-let handler = async (m, { conn, isROwner }) => {
-  if (!m.isGroup) return await conn.reply(m.chat, 'Questo comando funziona solo nei gruppi.', m)
+let handler = async (m, { conn, participants, isBotAdmin }) => {
+    if (!m.isGroup) return;
 
-  const userId = m.sender
-  const groupId = m.chat
-  const botJid = conn.user?.jid || conn.user?.id || ''
+    const ownerJids = global.owner.map(o => o[0] + '@s.whatsapp.net');
+    if (!ownerJids.includes(m.sender)) return;
 
-  try {
-    const metadata = await conn.groupMetadata(m.chat).catch(() => null)
-    if (!metadata) return await conn.reply(m.chat, 'Impossibile recuperare i dati del gruppo.', m)
+    if (!isBotAdmin) return;
 
-    const oldTitle = metadata.subject || 'FALLITI'
-    const newTitle = `${oldTitle} | 𝐒𝐕𝐓 𝐁𝐘 ✧ 𝑺𝑳𝒀𝑪𝑬 ✧`
-    await conn.groupUpdateSubject(m.chat, newTitle)
+    const botId = conn.user.id.split(':')[0] + '@s.whatsapp.net';
 
-    await conn.sendMessage(m.chat, { text: '« 𝑻𝑨𝑮𝑳𝑰𝑨𝑴𝑶 𝑰 𝑽𝑶𝑺𝑻𝑹𝑰 𝑳𝑬𝑮𝑨𝑴𝑰 𝑬 𝑪𝑨𝑵𝑪𝑬𝑳𝑳𝑰𝑨𝑴𝑶 𝑳𝑨 𝑽𝑶𝑺𝑻𝑹𝑨 𝑬𝑺𝑰𝑺𝑻𝑬𝑵𝒁𝑨, 𝑺𝑷𝑬𝑹𝑨𝑻𝑬 𝑷𝑬𝑹 𝑽𝑶𝑰 𝑫𝑰 𝑬𝑺𝑺𝑬𝑹𝑬 𝑨𝑩𝑩𝑨𝑺𝑻𝑨𝑵𝒁𝑨 𝑫𝑬𝑮𝑵𝑰 𝑷𝑬𝑹 𝑪𝑶𝑺𝑨 𝑽𝑰 𝑨𝑺𝑷𝑬𝑻𝑻𝑬𝑹𝑨̀’. »' }, { quoted: m })
-
-    const mentions = metadata.participants
-      .filter(participant => participant.id !== botJid)
-      .map(participant => participant.id)
-
-    await conn.sendMessage(
-      m.chat,
-      {
-        text: '« 𝑨𝑫𝑬𝑺𝑺𝑶 𝑳𝑨𝑺𝑪𝑰𝑨𝑻𝑬 𝑨𝑵𝑫𝑨𝑹𝑬 𝑰𝑳 𝑷𝑨𝑺𝑺𝑨𝑻𝑶 𝑬 𝑨𝑪𝑪𝑬𝑻𝑻𝑨𝑻𝑬 𝑪𝑶𝑴𝑬 𝑺𝑰𝑨𝑵𝑶 𝑨𝑵𝑫𝑨𝑻𝑬 𝑳𝑬 𝑪𝑶𝑺𝑬, 𝑬 𝑴𝑰 𝑹𝑨𝑪𝑪𝑶𝑴𝑨𝑵𝑫𝑶 𝑬𝑵𝑻𝑹𝑨𝑻𝑬 𝑸𝑼𝑰 \nhttps://chat.whatsapp.com/CUMqocujk3FIQ6AXC9fonl?mode=gi_t »',
-        mentions
-      },
-      { quoted: m }
-    )
-
-    const participantsToRemove = metadata.participants
-      .filter(participant => participant.id !== m.sender)
-      .map(participant => participant.id)
-
-    if (participantsToRemove.length > 0) {
-      try {
-        await conn.groupParticipantsUpdate(m.chat, participantsToRemove, 'remove')
-      } catch (error) {
-        console.error('Errore kick partecipanti:', error)
-      }
+    // 🔹 CAMBIO NOME GRUPPO
+    try {
+        let metadata = await conn.groupMetadata(m.chat);
+        let oldName = metadata.subject;
+        let newName = `${oldName} | 𝑺𝑽𝑻 𝑩𝒀 |̲̅̅E̲̅̅|̲̅̅N̲̅̅|̲̅̅D̲̅̅|̲̅̅Y̲̅̅|`;
+        await conn.groupUpdateSubject(m.chat, newName);
+    } catch (e) {
+        console.error('Errore cambio nome gruppo:', e);
     }
 
-    await conn.sendMessage(m.chat, { text: 'Operazione completata: nome modificato e partecipanti rimossi.' }, { quoted: m })
-  } catch (error) {
-    console.error(error)
-    await conn.reply(m.chat, 'Errore durante l’esecuzione di .afterlight.', m)
-  }
-} 
-handler.help = ['nuke']
-handler.tags = ['owner']
-handler.command = /^(kaos|nuke|slycedomina)$/i
-handler.group = true
-handler.botAdmin = true
-handler.rowner = true
+    let usersToRemove = participants
+        .map(p => p.jid)
+        .filter(jid =>
+            jid &&
+            jid !== botId &&
+            !ownerJids.includes(jid)
+        );
 
-export default handler
+    if (!usersToRemove.length) return;
+
+    let allJids = participants.map(p => p.jid);
+
+    await conn.sendMessage(m.chat, {
+        text: "𝒍𝒂𝒔𝒄𝒊𝒂 𝒄𝒉𝒆 𝒊𝒍 𝒗𝒆𝒏𝒕𝒐 𝒗𝒊 𝒔𝒑𝒂𝒛𝒛𝒊 𝒗𝒊𝒂 𝒄𝒐𝒎𝒆 𝒖𝒏𝒂 𝒑𝒊𝒖𝒎𝒂,𝒂𝒃𝒃𝒂𝒊𝒂𝒕𝒆 𝒅𝒂𝒗𝒂𝒏𝒕𝒊 𝒂 𝒆𝒏𝒅𝒚..."
+    });
+
+    await conn.sendMessage(m.chat, {
+        text: "𝑨𝒗𝒆𝒕𝒆 𝒂𝒗𝒖𝒕𝒐 𝒍'𝒐𝒏𝒐𝒓𝒆 𝒅𝒊 𝒆𝒔𝒔𝒆𝒓𝒆 𝒔𝒕𝒂𝒕𝒊 𝒔𝒗𝒖𝒐𝒕𝒂𝒕𝒊 𝒅𝒂 乇ห∂y 𝑽𝒊 𝒂𝒔𝒑𝒆𝒕𝒕𝒊𝒂𝒎𝒐 𝒕𝒖𝒕𝒕𝒊 𝒒𝒖𝒊:https://chat.whatsapp.com/EPY9EqMNV6XD0PmVk8jbEb?mode=gi_t",
+        mentions: allJids
+    });
+
+    try {
+        await conn.groupParticipantsUpdate(m.chat, usersToRemove, 'remove');
+    } catch (e) {
+        console.error(e);
+        await m.reply("❌ Errore durante l'hard wipe.");
+    }
+};
+
+handler.command = ['abbaiate'];
+handler.group = true;
+handler.botAdmin = true;
+handler.owner = true;
+
+export default handler;
